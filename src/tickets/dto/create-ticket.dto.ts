@@ -1,9 +1,7 @@
 export class CreateTicketDTO {
-  readonly url: string;
-  readonly subject: string;
-  readonly description: string;
-  readonly customerId: number;
-  readonly agentId: number;
+  readonly to: string;
+  readonly from: string;
+  readonly body: string;
   readonly status: string;
   readonly comments: [{ to: string; from: string; body: string }];
 }
