@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
 import { Ticket } from './interfaces/ticket.interface';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import { CreateTicketDTO } from './dto/create-ticket.dto';
 
 @Injectable()
