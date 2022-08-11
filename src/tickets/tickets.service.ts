@@ -5,7 +5,7 @@ import { Ticket } from './interfaces/ticket.interface';
 import { CreateTicketDTO } from './dto/create-ticket.dto';
 
 @Injectable()
-export class TicketsService {
+export class TicketService {
   constructor(
     @InjectModel('Ticket') private readonly ticketModel: Model<Ticket>,
   ) {}
