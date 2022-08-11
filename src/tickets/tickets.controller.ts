@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { TicketService } from './tickets.service';
 import { CreateTicketDTO } from './dto/create-ticket.dto';
+import { ValidateObjectId } from './shared/pipes/validate-object-id.pipes';
 
 @Controller('tickets')
 export class TicketController {
@@ -24,7 +25,7 @@ export class TicketController {
     });
   }
 
-  @Get('tickets/:ticketId')
+  @Get('/:ticketId')
   async getTicket(
     @Res() res,
     @Param('ticketId', new ValidateObjectId()) ticketId,
@@ -34,5 +35,11 @@ export class TicketController {
       throw new NotFoundException('Ticket does not exist!');
     }
     return res.status(HttpStatus.OK).json(ticket);
+  }
+
+  @Get('')
+  async getTickets(@Res() res) {
+    const tickets = await this.ticketService.getTickets();
+    return res.status(HttpStatus.OK).json(tickets);
   }
 }
