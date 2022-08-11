@@ -1,11 +1,14 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   NotFoundException,
   Param,
   Post,
+  Put,
+  Query,
   Res,
 } from '@nestjs/common';
 import { TicketService } from './tickets.service';
@@ -41,5 +44,39 @@ export class TicketController {
   async getTickets(@Res() res) {
     const tickets = await this.ticketService.getTickets();
     return res.status(HttpStatus.OK).json(tickets);
+  }
+
+  @Put('/edit')
+  async editTicket(
+    @Res() res,
+    @Query('ticketId', new ValidateObjectId()) ticketId,
+    @Body() createTicketDTO: CreateTicketDTO,
+  ) {
+    const editedTicket = await this.ticketService.editTicket(
+      ticketId,
+      createTicketDTO,
+    );
+    if (!editedTicket) {
+      throw new NotFoundException('Ticket does not exist!');
+    }
+    return res.status(HttpStatus.OK).json({
+      message: 'Ticket has been successfully updated!',
+      ticket: editedTicket,
+    });
+  }
+
+  @Delete('/delete')
+  async deleteTicket(
+    @Res() res,
+    @Query('ticketId', new ValidateObjectId()) ticketId,
+  ) {
+    const deletedTicket = await this.ticketService.deleteTicket(ticketId);
+    if (!deletedTicket) {
+      throw new NotFoundException('Ticket does not exist!');
+    }
+    return res.status(HttpStatus.OK).json({
+      message: 'Ticket has been deleted!',
+      ticket: deletedTicket,
+    });
   }
 }
