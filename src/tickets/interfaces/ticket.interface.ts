@@ -7,5 +7,5 @@ export interface Ticket extends Document {
   readonly customerId: number;
   readonly agentId: number;
   readonly status: string;
-  readonly comments: [{ type: string }];
+  readonly comments: [{ to: string; from: string; body: string }];
 }
