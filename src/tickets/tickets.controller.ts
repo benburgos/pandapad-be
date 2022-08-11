@@ -1,4 +1,13 @@
-import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  NotFoundException,
+  Param,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { TicketService } from './tickets.service';
 import { CreateTicketDTO } from './dto/create-ticket.dto';
 
@@ -13,5 +22,17 @@ export class TicketController {
       message: 'Ticket has been successfully created!',
       ticket: newTicket,
     });
+  }
+
+  @Get('tickets/:ticketId')
+  async getTicket(
+    @Res() res,
+    @Param('ticketId', new ValidateObjectId()) ticketId,
+  ) {
+    const ticket = await this.ticketService.getTicket(ticketId);
+    if (!ticket) {
+      throw new NotFoundException('Ticket does not exist!');
+    }
+    return res.status(HttpStatus.OK).json(ticket);
   }
 }
