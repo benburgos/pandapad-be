@@ -10,15 +10,18 @@ import {
   Put,
   Query,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { TicketService } from './tickets.service';
 import { CreateTicketDTO } from './dto/create-ticket.dto';
 import { ValidateObjectId } from './shared/pipes/validate-object-id.pipes';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('tickets')
 export class TicketController {
   constructor(private ticketService: TicketService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('/create')
   async createTicket(@Res() res, @Body() createTicketDTO: CreateTicketDTO) {
     const newTicket = await this.ticketService.createTicket(createTicketDTO);
@@ -46,6 +49,7 @@ export class TicketController {
     return res.status(HttpStatus.OK).json(tickets);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Put('/edit')
   async editTicket(
     @Res() res,
@@ -65,6 +69,7 @@ export class TicketController {
     });
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete('/delete')
   async deleteTicket(
     @Res() res,
