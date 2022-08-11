@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthzModule } from './authz/authz.module';
 import { TwilioService } from './twilio/twilio.service';
 import { DialogflowService } from './dialogflow/dialogflow.service';
+import { ConversationsController } from './conversations/conversations.controller';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { DialogflowService } from './dialogflow/dialogflow.service';
     ),
     AuthzModule,
   ],
-  controllers: [],
+  controllers: [ConversationsController],
   providers: [TwilioService, DialogflowService],
 })
 export class AppModule {}
