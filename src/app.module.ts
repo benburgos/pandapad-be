@@ -3,6 +3,7 @@ import { TicketsModule } from './tickets/tickets.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthzModule } from './authz/authz.module';
 import { TwilioService } from './twilio/twilio.service';
+import { DialogflowService } from './dialogflow/dialogflow.service';
 
 @Module({
   imports: [
@@ -14,6 +15,6 @@ import { TwilioService } from './twilio/twilio.service';
     AuthzModule,
   ],
   controllers: [],
-  providers: [TwilioService],
+  providers: [TwilioService, DialogflowService],
 })
 export class AppModule {}
