@@ -10,12 +10,10 @@ import {
   Put,
   Query,
   Res,
-  UseGuards,
 } from '@nestjs/common';
 import { TicketService } from './tickets.service';
 import { CreateTicketDTO } from './dto/create-ticket.dto';
 import { ValidateObjectId } from './shared/pipes/validate-object-id.pipes';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('tickets')
 export class TicketController {
