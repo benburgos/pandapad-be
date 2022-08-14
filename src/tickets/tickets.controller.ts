@@ -48,7 +48,6 @@ export class TicketController {
     return res.status(HttpStatus.OK).json(tickets);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Put('/edit')
   async editTicket(
     @Res() res,
