@@ -21,7 +21,6 @@ import { AuthGuard } from '@nestjs/passport';
 export class TicketController {
   constructor(private ticketService: TicketService) {}
 
-  @UseGuards(AuthGuard('jwt'))
   @Post('/create')
   async createTicket(@Res() res, @Body() createTicketDTO: CreateTicketDTO) {
     const newTicket = await this.ticketService.createTicket(createTicketDTO);
@@ -60,6 +59,8 @@ export class TicketController {
       ticketId,
       createTicketDTO,
     );
+    editedTicket.comments.push({ from: 'yes', body: 'even more yes' });
+    editedTicket.save();
     if (!editedTicket) {
       throw new NotFoundException('Ticket does not exist!');
     }

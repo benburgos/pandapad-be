@@ -5,5 +5,5 @@ export const TicketSchema = new mongoose.Schema({
   from: String,
   body: String,
   status: String,
-  comments: [{ to: String, from: String, body: String }],
+  comments: [{ from: String, body: String }],
 });

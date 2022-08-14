@@ -3,5 +3,5 @@ export class CreateTicketDTO {
   readonly from: string;
   readonly body: string;
   readonly status: string;
-  readonly comments: [{ to: string; from: string; body: string }];
+  readonly comments: [{ from: string; body: string }];
 }
