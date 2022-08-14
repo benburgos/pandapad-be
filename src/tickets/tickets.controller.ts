@@ -69,7 +69,6 @@ export class TicketController {
     });
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Delete('/delete')
   async deleteTicket(
     @Res() res,
