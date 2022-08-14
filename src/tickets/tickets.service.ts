@@ -31,7 +31,7 @@ export class TicketService {
   ): Promise<Ticket> {
     const editedTicket = await this.ticketModel.findByIdAndUpdate(
       ticketId,
-      createTicketDTO,
+      createTicketDTO.comments,
       { new: true },
     );
     return editedTicket;

@@ -59,7 +59,7 @@ export class TicketController {
       ticketId,
       createTicketDTO,
     );
-    editedTicket.comments.push({ from: 'yes', body: 'even more yes' });
+    editedTicket.comments.push(createTicketDTO);
     editedTicket.save();
     if (!editedTicket) {
       throw new NotFoundException('Ticket does not exist!');
